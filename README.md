@@ -126,7 +126,27 @@ If I were to continue working on this, these are the next things I would improve
 
 ### Front End
 
-This is a very basic React front end application. 
+I have included a very basic React application that is integrated with my API. It allows you to **create**, **read**, **update**, **delete**, and **search**
+user records. Each user has a username, email, and social security number, however, social security numbers are not displayed to users.
+
+  **Features**
+    - View a list of users (excluding SSN)
+    - Search for a single user by ID (result excludes SSN)
+    - Edit a user's username or email
+    - Create a user (includes SSN)
+    - Delete a user
+    - Search for users by username or email (result excludes SSN)
+    - Basic form validation on required fields
+  
+  **Notes**
+    - The SSN field is only required and show when creating a user
+    - The API does not return SSN for security purposes
+  
+  **Technologies used**
+    - React
+    - Javascript
+    - Fetch API for HTTP requests
+    - Tailwind CSS for styling
 
 ### AI Tools
 
