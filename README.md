@@ -164,3 +164,15 @@ It also includes a simple example of a front end integration of this API.
     be wrong. Instead, I prefer using Chat GPT's answers as a starting point to finding a solution when I get stuck on something. In this project, it was fairly helpful
     when I had a stack trace related to the datastore client I was using. Chat GPT's answers led me to the conclusion that I was not using the correct client to interact
     with my datastore, which was not clear from the original error message.
+
+### Proposed solution for pub/sub
+  I have not implemented the pub/sub component of this project. The following is my proposal for this component:
+  1. Add pub/sub credentials to the service account that my application uses.
+  2. Create a pub/sub topic, perhaps with a name such as `user-profile-events`
+  3. Whenever a user profile is created, updated or deleted, an event is published to the topic. The event would contain what was changed about the user profile.
+  4. Subscribers to the topic can now see real-time changes to user profiles.
+
+  This could be used for things such as:
+  - a service that sends welcome emails to new users
+  - triggering analytics events or updating dashboards
+  - keeping an audit trail of user changes
