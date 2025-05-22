@@ -22,7 +22,7 @@ The application exposes the following RESTful endpoints for managing user profil
 - **GET `/users`**  
   Retrieves a list of all user profiles.  
   Supports optional query parameters:
-  - 'search' (String)
+  - `search` (String)
 
 - **POST `/users`**  
   Creates a new user profile.  
@@ -64,5 +64,22 @@ Each package serves a specific purpose in maintaining separation of concerns and
 - **advice**:  
   Contains exception handlers (annotated with `@ControllerAdvice`) to manage error responses and return the correct status codes.
 
+### Caching
 
+To improve performance and reduce the number of reads against the datastore, user profile data is cached when a user searches for a profile by ID.
+The `getUserProfile(String id)` method is annotated with @Cacheable. This means:
+- On the first call for a given id, this method will fetch the user profile from the datastore and cache it.
+- On subsequent calls with the same id, it will check the cache first before hitting the datastore again.
+- Cache entries expire after 10 minutes.
+- The maximum number of entries in the cache is 1000.
+- The `id` is the cache key.
+The expiration time and cache size are configured in the `CacheConfig` class in the **config** layer.
+
+### Security
+
+### Considerations for Performance
+
+### Front End
+
+### AI Tools
 
