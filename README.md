@@ -153,13 +153,13 @@ It also includes a simple example of a front end integration of this API.
 
 ### AI Tools
 
-  **Github Copilot**
+  Github Copilot
   
     I used the auto-complete feature of Github Copilot for a majority of this project. I found it most helpful when I was completing the front end component, since
     react is the technology I was least familiar with while working on this project. The auto-complete options were sometimes helpful in the Java portion of the
     project, however I often found that Copilot's suggestions were not what I was looking for in this part.
 
-  **Chat GPT**
+  Chat GPT
 
     I asked Chat GPT questions from time to time while I was working on this as well. I prefer not to copy and paste code from Chat GPT very much, since this can
     lead to bad habits and long debugging sessions (especially if I don't understand the component that I copy and pasted). There is also a possibility that it can
