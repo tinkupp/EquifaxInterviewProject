@@ -106,7 +106,27 @@ In a production environment, it may be suitable to store the key in a secret sto
 
 ### Considerations for Performance
 
+There are several code changes I could still work on to improve the performance of this API.
+If I were to continue working on this, these are the next things I would improve:
+
+1. **Blocking calls to Firestore**
+   - The firestore interactions in this application use blocking `ApiFuture.get()` calls.
+   - This blocks the thread until the operation completes.
+   - This could be improved by using an asynchronous pattern for reads to handle firestore futures in a non-blocking way.
+
+2. **Full Collection Scan**
+   - `getUserProfiles` retrieves the entire UserProfile collection
+   - For large datasets, this is expensive and can result in high response times or costly reads.
+   - I could paginate the results of `getuserProfiles` using `limit()` and `startAfter()`
+
+3. **No Batch Writes for Updates/Deletes**
+   - Each document is written or deleted individually.
+   - In a scenario where multiple documents need to be updated or deleted simultaneously, batch operations would reduce the number of network round trips.
+   - I could use firestore's `WriteBatch` API for bulk operations when needed.
+
 ### Front End
+
+This is a very basic React front end application. 
 
 ### AI Tools
 
