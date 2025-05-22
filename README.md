@@ -101,8 +101,8 @@ I have implemented an encryption service (`BasicEncryptionService`) to encrypt s
     - The cipher is initialized in DECRYPT_MODE using the same secret key.
     - The original plaintext is recovered.
 
-  **Note:** The key used for the `EncryptionService` is in-memory only. This is also suitable for a development environment, but not for a production environment.
-  In a production environment, it may be suitable to store the key in a secret storage system, such as Vault.
+**Note:** The key used for the `EncryptionService` is in-memory only. This is also suitable for a development environment, but not for a production environment.
+In a production environment, it may be suitable to store the key in a secret storage system, such as Vault.
 
 ### Considerations for Performance
 
