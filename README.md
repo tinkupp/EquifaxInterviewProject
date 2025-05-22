@@ -77,6 +77,32 @@ The expiration time and cache size are configured in the `CacheConfig` class in 
 
 ### Security
 
+This application is configured to use SSL encryption. It listens on port 443, the default for HTTPS, and it uses a PCK12 keystore to serve encrypted traffic.
+- All requests to the API must use the `HTTPS://` protocol.
+- Requests sent over plain `HTTP` will be rejected. SSL is strictly enforced.
+This ensures that data is safe in transit.
+
+**Note:** The current SSL configuration is suitable for development purposes. For production environments, SSL would most likely be offloaded to a different service
+such as a reverse proxy, and certificate renewal would be automated in some way.
+
+When a user is created, they provide their social security number. This is sensitive information that should be encrypted not only in transit, but also in storage.
+The users' social security numbers are encrypted when they are stored, and then they are not accessible to users of the API afterwards.
+I have implemented an encryption service (`BasicEncryptionService`) to encrypt social security numbers in the service layer. Here's how it works:
+- **Algorithm:** AES
+- **Key Generation:** A 128-bit secret key using `KeyGenerator` during service construction. This key is used for encryption and decryption.
+- **Encryption Flow:**
+    - The plaintext is passed to the encrypt() method.
+    - It initializes a Cipher in ENCRYPT_MODE using the secret key.
+    - The plaintext is encrypted into a byte array.
+    - The result is Base64-encoded to produce a string-safe representation.
+- **Decryption Flow:**
+    - The decrypt() method takes a Base64-encoded encrypted string.
+    - It decodes the string into bytes.
+    - The cipher is initialized in DECRYPT_MODE using the same secret key.
+    - The original plaintext is recovered.
+ **Note:** The key used for the `EncryptionService` is in-memory only. This is also suitable for a development environment, but not for a production environment.
+  In a production environment, it may be suitable to store the key in a secret storage system, such as Vault.
+
 ### Considerations for Performance
 
 ### Front End
